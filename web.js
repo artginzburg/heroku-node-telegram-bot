@@ -1,18 +1,16 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+
 const packageInfo = require('./package.json');
 
-
 const app = express();
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.get('/', function (req, res) {
   res.json({ version: packageInfo.version });
 });
 
-var server = app.listen(process.env.PORT, "0.0.0.0", () => {
-  const host = server.address().address;
-  const port = server.address().port;
+const server = app.listen(process.env.PORT, '0.0.0.0', () => {
+  const { address: host, port } = server.address();
   console.log('Web server started at http://%s:%s', host, port);
 });
 

@@ -1,6 +1,6 @@
 {
   "name": "heroku-node-telegram-bot",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Starter pack for running telegram bot on the Heroku using Node.js",
   "main": "index.js",
   "scripts": {
@@ -8,12 +8,13 @@
     "start": "node index.js",
     "switch_to_dev": "export $(cat .env | xargs) && wget --spider https://api.telegram.org/bot$TOKEN/setWebhook?url= --delete-after && node index.js"
   },
-  "author": "Volodymyr Lut",
+  "author": "Volodymyr Lut & Art Ginzburg",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.15.0",
-    "dotenv": "^4.0.0",
-    "express": "^4.13.4",
-    "node-telegram-bot-api": "^0.30.0"
+    "express": "^4.17.3",
+    "node-telegram-bot-api": "^0.56.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.0"
   }
 }

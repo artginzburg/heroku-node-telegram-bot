@@ -1,4 +1,5 @@
 # heroku-node-telegram-bot
+
 Starter pack for running telegram bot on the Heroku using Node.js
 
 # Step-by-step
@@ -23,6 +24,32 @@ Starter pack for running telegram bot on the Heroku using Node.js
 6. Run `git add -A && git commit -m "Ready to run on heroku" && git push heroku master` to deploy your bot to the Heroku server.
 7. Send smth to the bot to check out if it works ok.
 
+### Download your app back from heroku to continue development
+
+> From [Git Cloning Existing Heroku Applications](https://devcenter.heroku.com/articles/git-clone-heroku-app)
+
+1. Run the following, replacing `myapp` with the name of your app.
+
+```ps1
+heroku git:clone -a myapp
+```
+
+2. Copy production environment to your local machine
+
+> From [Copy Heroku config vars to your local .env file](https://devcenter.heroku.com/articles/heroku-local#copy-heroku-config-vars-to-your-local-env-file)
+
+To copy one-by-one:
+
+```ps1
+heroku config:get CONFIG-VAR-NAME -s  >> .env
+```
+
+To fully overwrite your local environment with heroku's one:
+
+```ps1
+heroku config -s >> .env
+```
+
 ### Going further
 
 Now you may wish to add other functionality to your bot and here you can face some problems. The reason is that in development mode your bot works using [polling](https://en.wikipedia.org/wiki/Push_technology#Long_polling) and on the heroku server it uses the [webhook](https://core.telegram.org/bots/api#setwebhook), because heroku will shut down the web-server after a period of inactivity that will result in your polling loop to shut down too. Once webhook was enabled, telegram will return an error `{"ok":false,"error_code":409,"description":"Error: Conflict: another webhook is active"}` when you will try to use polling again, and it's actually ok.
@@ -33,7 +60,7 @@ To go back to development mode, you will need to run `npm run switch_to_dev`. Th
 
 As i work on MacOS and sometimes on Ubuntu, you may face some problems with my npm scripts, so let's figure out how they work.
 
-`npm run switch_to_dev` runs `export $(cat .env | xargs) && wget --spider https://api.telegram.org/bot$TOKEN/setWebhook?url= --delete-after && node index.js` which is actually an API call which will reset webhook (with the TOKEN from your environment variable) and `npm start`. 
+`npm run switch_to_dev` runs `export $(cat .env | xargs) && wget --spider https://api.telegram.org/bot$TOKEN/setWebhook?url= --delete-after && node index.js` which is actually an API call which will reset webhook (with the TOKEN from your environment variable) and `npm start`.
 
 **If wget don't work (or is not installed) on your OS**, you can simply open the `https://api.telegram.org/botYOUR_TOKEN/setWebhook?url=` in your browser, but don't forget to replace YOUR_TOKEN with the token, you've got from the BotFather.
 
@@ -41,7 +68,7 @@ If your bot is not responding locally, in most cases, you will need to reset the
 
 ### Links and references
 
-Actually, this repo is created because I've faced problems when I was trying to run the bot using [mvalipour's article](http://mvalipour.github.io/node.js/2015/12/06/telegram-bot-webhook-existing-express/) and [this PR](https://github.com/mvalipour/telegram-bot-webhook/pull/3) to his repo. Still, these links will be very useful for the beginners. 
+Actually, this repo is created because I've faced problems when I was trying to run the bot using [mvalipour's article](http://mvalipour.github.io/node.js/2015/12/06/telegram-bot-webhook-existing-express/) and [this PR](https://github.com/mvalipour/telegram-bot-webhook/pull/3) to his repo. Still, these links will be very useful for the beginners.
 
 The solution relies on the [node-telegram-bot-api wrapper](https://github.com/yagop/node-telegram-bot-api) by the @yagop, so you can find more info there.
 

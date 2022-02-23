@@ -34,6 +34,14 @@ Starter pack for running telegram bot on the Heroku using Node.js
 heroku git:clone -a myapp
 ```
 
+If you're not using Heroku for deployment (e.g. you deploy from GitHub), first clone the repo your preferred way (e.g. clone using GitHub Desktop). Then add a "heroku" remote to the repository configuration using the following command (replace `myapp` with the name of your app).
+
+```ps1
+git remote add heroku https://git.heroku.com/myapp.git
+```
+
+After adding the remote, you will be able to use commands like `heroku config` without specifying your app name manually each time.
+
 2. Copy production environment to your local machine
 
 > From [Copy Heroku config vars to your local .env file](https://devcenter.heroku.com/articles/heroku-local#copy-heroku-config-vars-to-your-local-env-file)
@@ -47,7 +55,7 @@ heroku config:get CONFIG-VAR-NAME -s  >> .env
 To fully overwrite your local environment with heroku's one:
 
 ```ps1
-heroku config -s >> .env
+heroku config -s > .env
 ```
 
 ### Going further

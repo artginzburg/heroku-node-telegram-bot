@@ -24,6 +24,8 @@ Starter pack for running telegram bot on the Heroku using Node.js
 6. Run `git add -A && git commit -m "Ready to run on heroku" && git push heroku master` to deploy your bot to the Heroku server.
 7. Send smth to the bot to check out if it works ok.
 
+> Pro tip: use `heroku config:set ${cat .env | xargs}` to easily copy all your environment variables from .env to heroku app configuration
+
 ### Download your app back from heroku to continue development
 
 > From [Git Cloning Existing Heroku Applications](https://devcenter.heroku.com/articles/git-clone-heroku-app)

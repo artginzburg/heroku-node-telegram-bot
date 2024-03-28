@@ -12,7 +12,7 @@
   "author": "Volodymyr Lut & Art Ginzburg",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.3",
+    "express": "^4.19.2",
     "node-telegram-bot-api": "^0.56.0"
   },
   "devDependencies": {
